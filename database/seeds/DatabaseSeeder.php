@@ -16,79 +16,71 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         DB::table('users')->delete();
-        DB::table('permissions')->delete();
-        DB::table('roles')->delete();
-        DB::table('role_user')->delete();
-        DB::table('permission_role')->delete();
         DB::table('tasks')->delete();
         DB::table('to_do_lists')->delete();
-
-
-        $permissions = array(
-          ['id' => 1, 'name' => 'create_task'],
-          ['id' => 2, 'name' => 'read_task'],
-          ['id' => 3, 'name' => 'update_task'],
-          ['id' => 4, 'name' => 'delete_tasks'],
-          ['id' => 5, 'name' => 'create_todolist'],
-          ['id' => 6, 'name' => 'read_todolist'],
-          ['id' => 7, 'name' => 'update_todolist'],
-          ['id' => 8, 'name' => 'delete_todolist'],
-          ['id' => 9, 'name' => 'create_user'],
-          ['id' => 10, 'name' => 'read_user'],
-          ['id' => 11, 'name' => 'update_user'],
-          ['id' => 12, 'name' => 'delete_user'],
-        );
-
-        DB::table('permissions')->insert($permissions);
-
-        // foreach ($permissions as $permission)
-        // {
-        //     Permission::create($permission)
-        // }
-
-
-        $roles = array(
-          ['id' => 1, 'name' => 'admin'],
-          ['id' => 2, 'name' => 'user'],
-        );
-
-        DB::table('roles')->insert($roles);
-
-        $permission_role = array(
-          ['permission_id' => 1, 'role_id' => 1],  ['permission_id' => 2, 'role_id' => 1],
-          ['permission_id' => 3, 'role_id' => 1],  ['permission_id' => 4, 'role_id' => 1],
-          ['permission_id' => 5, 'role_id' => 1],  ['permission_id' => 6, 'role_id' => 1],
-          ['permission_id' => 7, 'role_id' => 1],  ['permission_id' => 8, 'role_id' => 1],
-          ['permission_id' => 9, 'role_id' => 1],  ['permission_id' => 10, 'role_id' => 1],
-          ['permission_id' => 11, 'role_id' => 1], ['permission_id' => 12, 'role_id' => 1],
-
-          ['permission_id' => 1, 'role_id' => 2],  ['permission_id' => 2, 'role_id' => 2],
-          ['permission_id' => 3, 'role_id' => 2],  ['permission_id' => 4, 'role_id' => 2],
-          ['permission_id' => 5, 'role_id' => 2],  ['permission_id' => 6, 'role_id' => 2],
-          ['permission_id' => 7, 'role_id' => 2],  ['permission_id' => 8, 'role_id' => 2],
-          ['permission_id' => 9, 'role_id' => 2],  ['permission_id' => 10, 'role_id' => 2],
-          ['permission_id' => 11, 'role_id' => 2], ['permission_id' => 12, 'role_id' => 2],
-        );
-
-        DB::table('permission_role')->insert($permission_role);
+        DB::table('email_user')->delete();
 
         //TODO: replace regular password with hashed one
         // Hash::make('password');
         $users = array(
-            ['id' => 1, 'username' => 'admin', 'email' => 'admin@gmail.com', 'password' => 'admin', 'suspended' => false, 'profile_image' => 'none'],
-            ['id' => 2, 'username' => 'pe6o', 'email' => 'petur@gmail.com', 'password' => 'password', 'suspended' => false, 'profile_image' => 'none'],
+            ['id' => 1, 'username' => 'admin', 'email' => 'admin@gmail.com',
+             'password' => 'admin', 'suspended' => false, 'profile_image' => 'none'],
+
+            ['id' => 2, 'username' => 'pe6o', 'email' => 'petur@gmail.com',
+             'password' => 'password', 'suspended' => false, 'profile_image' => 'none'],
+
+            ['id' => 3, 'username' => 'ivan', 'email' => 'ivan@gmail.com',
+             'password' => 'password', 'suspended' => true, 'profile_image' => 'none'],
+
         );
 
         DB::table('users')->insert($users);
 
 
-        $role_user = array(
-          ['user_id' => 1, 'role_id' => 1],
-          ['user_id' => 2, 'role_id' => 2],
+        $lists = array(
+            ['id' => 1, 'user_id' => 1, 'name' => 'admin responsibilities'],
+            ['id' => 2, 'user_id' => 1, 'name' => 'personal stuff'],
+            ['id' => 3, 'user_id' => 2, 'name' => 'watch list'],
+            ['id' => 4, 'user_id' => 3, 'name' => 'shopping list'],
         );
 
-        DB::table('role_user')->insert($role_user);
+        DB::table('to_do_lists')->insert($lists);
 
+
+        $tasks = array(
+          ['id' => 1, 'to_do_list_id' => 1, 'name' => 'suspend invan', 'completed' => 1],
+          ['id' => 2, 'to_do_list_id' => 1, 'name' => 'look for iregulations', 'completed' => 0],
+          ['id' => 3, 'to_do_list_id' => 2, 'name' => 'dentist apointment', 'completed' => 0],
+          ['id' => 4, 'to_do_list_id' => 2, 'name' => 'get car checked', 'completed' => 0],
+          ['id' => 5, 'to_do_list_id' => 2, 'name' => 'email spas', 'completed' => 1],
+          ['id' => 6, 'to_do_list_id' => 3, 'name' => 'watch age of ultron', 'completed' => 1],
+          ['id' => 7, 'to_do_list_id' => 3, 'name' => 'watch jumanji 2', 'completed' => 0],
+          ['id' => 8, 'to_do_list_id' => 4, 'name' => 'potatoes', 'completed' => 0],
+          ['id' => 9, 'to_do_list_id' => 4, 'name' => 'tomatoes', 'completed' => 0],
+          ['id' => 10, 'to_do_list_id' => 4, 'name' => 'bread', 'completed' => 0],
+          ['id' => 11, 'to_do_list_id' => 4, 'name' => 'cheese', 'completed' => 0],
+          ['id' => 12, 'to_do_list_id' => 4, 'name' => 'olive oil', 'completed' => 0],
+        );
+
+        DB::table('tasks')->insert($tasks);
+
+
+        $emails = array(
+            ['id' => 1, 'author' => 'admin', 'subject' => 'new year', 'content' => 'happy 2018 to every one',
+              'status' => 'sent', 'scheduled' => 3, 'people_sent' => 3],
+
+        );
+
+        DB::table('emails')->insert($emails);
+
+
+        $email_user = array(
+          ['user_id' => 1, 'email_id' => 1, 'seen' => 0],
+          ['user_id' => 2, 'email_id' => 1, 'seen' => 0],
+          ['user_id' => 3, 'email_id' => 1, 'seen' => 0],
+        );
+
+        DB::table('email_user')->insert($email_user);
 
         Model::reguard();
     }

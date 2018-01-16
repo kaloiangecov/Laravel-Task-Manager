@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             ->references('id')->on('to_do_lists')
             ->onDelete('cascade');
           $table->string('name');
-          $table->boolean('completed');
+          $table->boolean('completed')->default(false);
           $table->timestamps();
       });
     }

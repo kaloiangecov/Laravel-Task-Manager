@@ -14,14 +14,9 @@ class Task extends Model
    */
   protected $fillable = [
       'name',
-      'completed' => false,
+      'completed',
       'to_do_list_id',
   ];
-
-  function __construct()
-  {
-
-  }
 
   public function toDoList()
   {

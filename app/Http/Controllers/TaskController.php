@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -14,10 +15,35 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // return 'asd';
-        return response()->json(['Task'=>Task::all()]);
+        return response()->json(['Tasks'=>Task::all()]);
     }
 
+    public function findByListId($id)
+    {
+        return response()->json(['Task'=>Task::where('to_do_list_id', $id)->get()]);
+    }
+
+    public function findByListIdActiveOnly($toDoListId)
+    {
+        return response()->json(['Tasks'=>Task::where('completed', 0)
+                                              ->where('to_do_list_id', $toDoListId)->get()]);
+    }
+
+    public function countOpenTasks()
+    {
+        return response()->json(['openTasks'=>Task::where('completed', 0)->count()]);
+    }
+
+    public function countClosedTasks()
+    {
+        return response()->json(['openTasks'=>Task::where('completed', 1)->count()]);
+    }
+
+    public function countCreatedYesterday()
+    {
+        $yesterday = Carbon::now()->subDay()->toDateString();
+        return Response()->json(['yesterdayTasks'=>Task::where('created_at', 'LIKE', "%$yesterday%")->count()]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -70,9 +96,8 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $task->update([$request]);
-        return 'success';
-        // return response()->json(['Task'=>$task->update(['completed' => !$task->completed])]);
+        $task->update($request->all());
+        return response()->json(['Task'=>$task]);
     }
 
     /**
@@ -83,6 +108,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        return response()->json(['Task'=>$task->delete()]);
+        $task->delete();
+        return response()->json(['Task'=>$task]);
     }
 }

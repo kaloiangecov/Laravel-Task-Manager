@@ -19,7 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('password', 30);
             $table->string('email')->unique();
             $table->string('profile_image')->nullable();
-            $table->boolean('suspended');
+            $table->boolean('suspended')->default(false);
+            $table->date('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

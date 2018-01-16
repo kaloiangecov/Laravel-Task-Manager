@@ -17,11 +17,6 @@ class ToDoList extends Model
       'user_id',
   ];
 
-  function __construct()
-  {
-
-  }
-
   public function tasks()
   {
     return $this->hasMany('App\Task');

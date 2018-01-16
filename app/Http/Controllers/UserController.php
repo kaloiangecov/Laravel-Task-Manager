@@ -14,12 +14,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        try {
-            return response()->json(['users'=>User::all()]);
+        return response()->json(['users'=>User::all()]);
+    }
+
+    public function findUsersByStatus($suspendedStatus = null)
+    {
+        if($suspendedStatus != null)
+        {
+            return response()->json(['users'=>User::where('suspended', $suspendedStatus)->get()]);
         }
-        catch (\Exception $e) {
-            return $e->getMessage();
-        }
+
+        return response()->json(['users'=>User::all()]);
+    }
+
+    public function countUsers()
+    {
+        return response()->json(['usersCount'=>User::count()]);
+    }
+
+    public function findByEmail($query)
+    {
+        return response()->json(['users'=>User::where('email', 'like', "%$query%")->get()]);
     }
 
     /**
@@ -74,9 +89,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update(['username' => $request->$username]);
-        return 'success';
-        // return response()->json(['users'=>$user->update($request->all())]);
+        $user->update($request->all());
+        return response()->json(['users'=>$user]);
     }
 
     /**
@@ -87,6 +101,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        return response()->json(['users'=>$user->delete()]);
+        $user->delete();
+        return response()->json(['users'=>$user]);
     }
 }

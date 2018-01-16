@@ -2,21 +2,19 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+// use Illuminate\Auth\Authenticatable;
+// use Illuminate\Auth\Passwords\CanResetPassword;
+// use Illuminate\Foundation\Auth\Access\Authorizable;
+// use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+// use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+// use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
 {
-
-    use Authenticatable, CanResetPassword, EntrustUserTrait;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,14 +26,10 @@ class User extends Model implements AuthenticatableContract,
          'email',
          'role_id',
          'password',
-         'suspended' => false,
+         'suspended',
          'profile_image',
+         'last_login',
      ];
-
-     // function __construct()
-     // {
-     //
-     // }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -54,5 +48,11 @@ class User extends Model implements AuthenticatableContract,
     public function toDoLists()
     {
       return $this->hasMany('App\ToDoList');
+    }
+
+    public function emails()
+    {
+      return $this->belongsToMany('App\Email')
+        ->withPivot('seen');
     }
 }
