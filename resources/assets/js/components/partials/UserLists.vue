@@ -17,7 +17,7 @@
                      class="task-input" v-on:keyup.enter="newTask(list.id, index)">
               <br>
               <div v-for="task in list.tasks">
-                <div v-if="task.completed === 0" class="tasks-magin">
+                <div v-if="task.completed == false" class="tasks-magin">
                   <input type="checkbox" @click="updateTask(task)"> {{ task.name }}
                 </div>
               </div>
@@ -32,7 +32,7 @@
               <br>
               <div v-if="formData[index].showCompleted">
                 <div v-for="task in list.tasks">
-                  <div v-if="task.completed === 1" class="tasks-magin">
+                  <div v-if="task.completed == true" class="tasks-magin">
                     <div class="inline-block left">
                       <span class="glyphicon glyphicon-trash" aria-hidden="true">
                       </span>
@@ -95,7 +95,7 @@
         checkCompleted(tasks) {
           let completed = false;
           tasks.forEach(function(task) {
-            if(task.completed === 1)
+            if(task.completed == true)
             {
               completed = true;
             }

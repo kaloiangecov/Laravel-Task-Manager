@@ -23,7 +23,7 @@
           let completed = '';
 
           data.tasks.forEach(function(task) {
-            if(task.completed === 0) {
+            if(task.completed == false) {
               unfinished = unfinished.concat("<li>" + task.name + "</li>");
             } else {
               completed = completed.concat("<li class='completed'>" + task.name +"</li>");

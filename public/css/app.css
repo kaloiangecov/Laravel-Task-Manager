@@ -8413,6 +8413,7 @@ body {
 
 .template-body {
   padding: 15px;
+  height: auto;
   border: 2px solid black;
 }
 

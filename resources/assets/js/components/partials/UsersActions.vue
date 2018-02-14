@@ -2,7 +2,7 @@
   <div style="text-align: center">
     <button @click="deleteUser(data)">Delete</button>
     <button>Login as this user</button>
-    <button @click="suspend(data, 1)" v-if='data.suspended === 0'>Suspend</button>
+    <button @click="suspend(data, 1)" v-if='data.suspended == false'>Suspend</button>
     <button @click="suspend(data, 0)" v-else>Unsuspend</button>
   </div>
 

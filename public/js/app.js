@@ -59658,7 +59658,7 @@ var render = function() {
     _vm._v(" "),
     _c("button", [_vm._v("Login as this user")]),
     _vm._v(" "),
-    _vm.data.suspended === 0
+    _vm.data.suspended == false
       ? _c(
           "button",
           {
@@ -60198,7 +60198,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_js_modal___default.a, { dialog: true });
       var completed = '';
 
       data.tasks.forEach(function (task) {
-        if (task.completed === 0) {
+        if (task.completed == false) {
           unfinished = unfinished.concat("<li>" + task.name + "</li>");
         } else {
           completed = completed.concat("<li class='completed'>" + task.name + "</li>");
@@ -60842,7 +60842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     checkCompleted: function checkCompleted(tasks) {
       var completed = false;
       tasks.forEach(function (task) {
-        if (task.completed === 1) {
+        if (task.completed == true) {
           completed = true;
         }
       });
@@ -60930,7 +60930,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm._l(list.tasks, function(task) {
                       return _c("div", [
-                        task.completed === 0
+                        task.completed == false
                           ? _c("div", { staticClass: "tasks-magin" }, [
                               _c("input", {
                                 attrs: { type: "checkbox" },
@@ -60975,7 +60975,7 @@ var render = function() {
                         "div",
                         _vm._l(list.tasks, function(task) {
                           return _c("div", [
-                            task.completed === 1
+                            task.completed == true
                               ? _c("div", { staticClass: "tasks-magin" }, [
                                   _vm._m(0, true),
                                   _vm._v(" "),

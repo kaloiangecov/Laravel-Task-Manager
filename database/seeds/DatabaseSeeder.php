@@ -60,18 +60,19 @@ class DatabaseSeeder extends Seeder
 
 
         $tasks = array(
-          ['id' => 1, 'to_do_list_id' => 1, 'name' => 'suspend invan', 'completed' => 1],
-          ['id' => 2, 'to_do_list_id' => 1, 'name' => 'look for iregulations', 'completed' => 0],
-          ['id' => 3, 'to_do_list_id' => 2, 'name' => 'dentist apointment', 'completed' => 0],
-          ['id' => 4, 'to_do_list_id' => 2, 'name' => 'get car checked', 'completed' => 0],
-          ['id' => 5, 'to_do_list_id' => 2, 'name' => 'email spas', 'completed' => 1],
-          ['id' => 6, 'to_do_list_id' => 3, 'name' => 'watch age of ultron', 'completed' => 1],
-          ['id' => 7, 'to_do_list_id' => 3, 'name' => 'watch jumanji 2', 'completed' => 0],
-          ['id' => 8, 'to_do_list_id' => 4, 'name' => 'potatoes', 'completed' => 0],
-          ['id' => 9, 'to_do_list_id' => 4, 'name' => 'tomatoes', 'completed' => 0],
-          ['id' => 10, 'to_do_list_id' => 4, 'name' => 'bread', 'completed' => 0],
-          ['id' => 11, 'to_do_list_id' => 4, 'name' => 'cheese', 'completed' => 0],
-          ['id' => 12, 'to_do_list_id' => 4, 'name' => 'olive oil', 'completed' => 0],
+          ['id' => 1, 'to_do_list_id' => 1, 'name' => 'suspend invan', 'completed' => true],
+          ['id' => 2, 'to_do_list_id' => 1, 'name' => 'look for iregulations', 'completed' => false],
+          ['id' => 3, 'to_do_list_id' => 1, 'name' => 'migrate database', 'completed' => false],
+          ['id' => 4, 'to_do_list_id' => 2, 'name' => 'dentist apointment', 'completed' => false],
+          ['id' => 5, 'to_do_list_id' => 2, 'name' => 'get car checked', 'completed' => false],
+          ['id' => 6, 'to_do_list_id' => 2, 'name' => 'email spas', 'completed' => true],
+          ['id' => 7, 'to_do_list_id' => 3, 'name' => 'watch age of ultron', 'completed' => true],
+          ['id' => 8, 'to_do_list_id' => 3, 'name' => 'watch jumanji 2', 'completed' => false],
+          ['id' => 9, 'to_do_list_id' => 4, 'name' => 'potatoes', 'completed' => false],
+          ['id' => 10, 'to_do_list_id' => 4, 'name' => 'tomatoes', 'completed' => false],
+          ['id' => 11, 'to_do_list_id' => 4, 'name' => 'bread', 'completed' => false],
+          ['id' => 12, 'to_do_list_id' => 4, 'name' => 'cheese', 'completed' => false],
+          ['id' => 13, 'to_do_list_id' => 4, 'name' => 'olive oil', 'completed' => false],
         );
 
         DB::table('tasks')->insert($tasks);
@@ -88,9 +89,9 @@ class DatabaseSeeder extends Seeder
 
 
         $email_user = array(
-          ['user_id' => 1, 'email_id' => 1, 'seen' => 0],
-          ['user_id' => 2, 'email_id' => 1, 'seen' => 0],
-          ['user_id' => 3, 'email_id' => 1, 'seen' => 0],
+          ['user_id' => 1, 'email_id' => 1, 'seen' => false],
+          ['user_id' => 2, 'email_id' => 1, 'seen' => false],
+          ['user_id' => 3, 'email_id' => 1, 'seen' => false],
         );
 
         DB::table('email_user')->insert($email_user);
