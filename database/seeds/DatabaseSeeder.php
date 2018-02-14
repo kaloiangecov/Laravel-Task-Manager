@@ -18,19 +18,31 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('tasks')->delete();
         DB::table('to_do_lists')->delete();
+        DB::table('emails')->delete();
         DB::table('email_user')->delete();
+        DB::table('roles')->delete();
+
+        $roles = array(
+          ['id' => 1, 'name' => 'admin'],
+          ['id' => 2, 'name' => 'user'],
+        );
+
+        DB::table('roles')->insert($roles);
 
         //TODO: replace regular password with hashed one
         // Hash::make('password');
         $users = array(
             ['id' => 1, 'username' => 'admin', 'email' => 'admin@gmail.com',
-             'password' => 'admin', 'suspended' => false, 'profile_image' => 'none'],
+             'password' => 'admin', 'suspended' => false, 'profile_image' => 'none',
+             'role_id' => 1, 'created_at' => '2018-02-12 16:49:37'],
 
             ['id' => 2, 'username' => 'pe6o', 'email' => 'petur@gmail.com',
-             'password' => 'password', 'suspended' => false, 'profile_image' => 'none'],
+             'password' => 'password', 'suspended' => false, 'profile_image' => 'none',
+             'role_id' => 2, 'created_at' => '2018-02-12 16:49:37'],
 
             ['id' => 3, 'username' => 'ivan', 'email' => 'ivan@gmail.com',
-             'password' => 'password', 'suspended' => true, 'profile_image' => 'none'],
+             'password' => 'password', 'suspended' => true, 'profile_image' => 'none',
+             'role_id' => 2, 'created_at' => '2018-02-12 16:49:37'],
 
         );
 
@@ -38,10 +50,10 @@ class DatabaseSeeder extends Seeder
 
 
         $lists = array(
-            ['id' => 1, 'user_id' => 1, 'name' => 'admin responsibilities'],
-            ['id' => 2, 'user_id' => 1, 'name' => 'personal stuff'],
-            ['id' => 3, 'user_id' => 2, 'name' => 'watch list'],
-            ['id' => 4, 'user_id' => 3, 'name' => 'shopping list'],
+            ['id' => 1, 'user_id' => 1, 'name' => 'admin responsibilities', 'created_at' => '2018-02-12 16:49:37'],
+            ['id' => 2, 'user_id' => 1, 'name' => 'personal stuff', 'created_at' => '2018-02-12 16:49:37'],
+            ['id' => 3, 'user_id' => 2, 'name' => 'watch list', 'created_at' => '2018-02-12 16:49:37'],
+            ['id' => 4, 'user_id' => 3, 'name' => 'shopping list', 'created_at' => '2018-02-12 16:49:37'],
         );
 
         DB::table('to_do_lists')->insert($lists);
@@ -66,8 +78,9 @@ class DatabaseSeeder extends Seeder
 
 
         $emails = array(
-            ['id' => 1, 'author' => 'admin', 'subject' => 'new year', 'content' => 'happy 2018 to every one',
-              'status' => 'sent', 'scheduled' => 3, 'people_sent' => 3],
+            ['id' => 1, 'author' => 'admin', 'subject' => 'new year',
+             'content' => 'happy 2018 to every one', 'status' => 'sent',
+             'scheduled' => 3, 'people_sent' => 3, 'user_id' => 1],
 
         );
 

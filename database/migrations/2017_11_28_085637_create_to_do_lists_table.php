@@ -14,7 +14,7 @@ class CreateToDoListsTable extends Migration
     public function up()
     {
       Schema::create('to_do_lists', function (Blueprint $table) {
-          $table->increments('id');
+          $table->increments('id')->unsigned();
           $table->integer('user_id')->unsigned();
           $table->foreign('user_id')
             ->references('id')->on('users')

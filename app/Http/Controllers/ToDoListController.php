@@ -10,13 +10,20 @@ use Carbon\Carbon;
 class ToDoListController extends Controller
 {
 
-    public function index()
-    {
+    public function index() {
         return response()->json(['toDoList'=>ToDoList::with('tasks')->get()]);
     }
 
-    public function findListByUsername($userEmail)
-    {
+    public function getListsByUserId($user_id) {
+        return response()->json(['toDoList'=>ToDoList::with('tasks')->where('user_id', $user_id)->get()]);
+    }
+
+    public function getAllWithTasksAndCount() {
+      $lists = ToDoList::with('tasksCount')->with('tasks')->with('user')->get();
+      return response()->json(['lists'=>$lists]);
+    }
+
+    public function findListByUsername($userEmail) {
         return response()->json([
                                 'toDoList'=>ToDoList::with('tasks')->whereHas('User', function($query) use ($userEmail){
                                     $query->where('email', $userEmail);
@@ -24,40 +31,25 @@ class ToDoListController extends Controller
                               ]);
     }
 
-    public function countLists()
-    {
+    public function countLists() {
         return response()->json(['listsCount'=>ToDoList::count()]);
     }
 
-    public function countCreatedYesterday()
-    {
+    public function countCreatedYesterday() {
         $yesterday = Carbon::now()->subDay()->toDateString();
         return Response()->json(['yesterdayLists'=>ToDoList::where('created_at', 'LIKE', "%$yesterday%")->count()]);
     }
 
-    public function countUserLists($id)
-    {
+    public function countUserLists($id) {
         return response()->json(['listsCount'=>ToDoList::where('user_id', $id)->count()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         return response()->json(['toDoList'=>ToDoList::create($request->all())]);
     }
 
-    public function createCopyTasks(Request $request, $id)
-    {
+    public function createCopyTasks(Request $request, $id) {
         $newToDoList = new ToDoList;
         $newToDoList = ToDoList::create($request->all());
 
@@ -75,27 +67,24 @@ class ToDoListController extends Controller
     }
 
 
-    public function show(ToDoList $toDoList)
-    {
+    public function show(ToDoList $toDoList) {
         return response()->json(['toDoList'=>$toDoList]);
     }
 
 
-    public function edit(ToDoList $toDoList)
-    {
+    public function edit(ToDoList $toDoList) {
        return response()->json(['toDoList'=>$toDoList]);
     }
 
 
-    public function update(Request $request, ToDoList $toDoList)
-    {
+    public function update(Request $request, ToDoList $toDoList) {
         $toDoList->update($request->all());
         return response()->json(['toDoList'=>$toDoList]);
     }
 
 
-    public function destroy(ToDoList $toDoList)
-    {
+    public function destroy($list_id) {
+        $toDoList = ToDoList::find($list_id);
         $toDoList->delete();
         return response()->json(['toDoList'=>$toDoList]);
     }

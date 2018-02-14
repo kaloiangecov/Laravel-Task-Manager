@@ -14,13 +14,16 @@ class CreateEmailsTable extends Migration
     public function up()
     {
         Schema::create('emails', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('author');
             $table->string('subject');
             $table->string('content');
             $table->string('status')->default('sent');
             $table->integer('scheduled')->nullable();
             $table->integer('people_sent')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('email_user')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 

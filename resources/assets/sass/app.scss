@@ -7,3 +7,203 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+.create-btn {
+  position: relative;
+  top: 30%;
+  left: 25%;
+}
+
+.new-list-wrapper {
+  position: fixed;
+  top: 21%;
+  right: 10%;
+  width: 230px;
+}
+
+.create-list {
+  height: 330px;
+  padding: 0 5px 0 20px;
+  border: 2px solid black;
+}
+
+
+.list-box {
+  margin: 20px;
+  padding: 0 20px 20px 20px;
+  border: 2px solid black;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.list-caption {
+  background-color: white;
+  display: inline-block;
+  padding: 0 5px 0 5px;
+  position: relative;
+  font-weight: bold;
+  top: -15px;
+  color: black;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  height: 10%;
+  width: 100%;
+}
+
+.body {
+  color: black;
+  padding: 20px;
+  height: 90%;
+  width: 100%;
+}
+
+.template-body {
+  padding: 15px;
+  border: 2px solid black;
+}
+
+.admin-links {
+  margin:0;
+  padding: 0;
+}
+
+.form-caption {
+  color: black;
+  font-weight: bold;
+  position: relative;
+  top: -10px;
+  left: 20px;
+  display: inline-block;
+  background-color: white;
+  overflow: hidden;
+  padding: 0 5px 0 5px;
+}
+
+.to-do-lists {
+  color: black;
+  font-weight: bold;
+  position: relative;
+  top: -26px;
+  left: 20px;
+  display: inline-block;
+  background-color: white;
+  overflow: hidden;
+  padding: 0 5px 0 5px;
+}
+
+h3 {
+  color: black;
+}
+
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.v-align {
+  vertical-align: middle;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.create-list-header {
+  margin: 0 0 20px 0;
+}
+
+.create-list-labels {
+  padding: 5px 0 5px 0;
+}
+
+.email-form {
+  border: 1px solid;
+}
+
+.task-input {
+  width: 210px;
+}
+
+.tasks-magin {
+  margin: 5px 0 5px 0;
+}

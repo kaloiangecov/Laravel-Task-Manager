@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Email extends Model
+class Role extends Model
 {
 
   /**
@@ -13,14 +13,8 @@ class Email extends Model
    * @var array
    */
    protected $fillable = [
-       'author',
-       'subject',
-       'content',
-       'emails_count',
-       'emails_sent',
-       'user_id',
+       'name',
    ];
-
 
    public function users() {
      return $this->belongsToMany('App\User');

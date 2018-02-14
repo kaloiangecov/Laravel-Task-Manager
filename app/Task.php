@@ -18,8 +18,7 @@ class Task extends Model
       'to_do_list_id',
   ];
 
-  public function toDoList()
-  {
+  public function toDoList() {
     return $this->belongsTo('App\ToDoList');
   }
 }

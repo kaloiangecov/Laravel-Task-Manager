@@ -8,91 +8,55 @@ use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+    public function index() {
         return response()->json(['Email'=>Email::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function findByUserId($user_id) {
+        return response()->json([Email::where('user_id', $user_id)->get()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         return response()->json(['Email'=>Email::create($request->all())]);
     }
 
-    public function emailActiveUsers(Request $request)
-    {
+    public function emailActiveUsers(Request $request) {
       $email = Email::create($request->all());
       $users = User::where('suspended', 0)->get();
-      
+
+      $email->scheduled = count($users);
+      $peopleSent = 0;
+
       foreach ($users as $user) {
+        try {
           $user->emails()->attach($email->id);
           $user->save();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        $peopleSent++;
       }
+      $email->people_sent = $peopleSent;
+      $email->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Email  $email
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Email $email)
-    {
+    public function show(Email $email) {
         return response()->json(['Email'=>$email]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Email  $email
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Email $email)
-    {
+    public function edit(Email $email) {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Email  $email
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Email $email)
-    {
+    public function update(Request $request, Email $email) {
         $email->update($request->all());
         return response()->json(['Email'=>$email]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Email  $email
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Email $email)
-    {
+
+    public function destroy($email_id) {
+        $email = Email::find($email_id);
         $email->delete();
         return response()->json(['Email'=>$email]);
     }
